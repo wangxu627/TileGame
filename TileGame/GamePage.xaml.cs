@@ -92,22 +92,17 @@ namespace TileGame
             {
                 for (int j = 0; j < Column; j++)
                 {
-                //    int idx = i * Column + j;
                     Image img = new Image();
-                    //img.Margin = new Thickness(2);
                     img.Stretch = Stretch.Fill;
                     img.Width = FrameWidth - 2;
                     img.Height = FrameHeight - 2;
                     img.RenderTransform = new TranslateTransform();
-                    //Grid.SetRow(img, i);
-                    //Grid.SetColumn(img, j);
                     Canvas.SetTop(img, i * FrameHeight);
                     Canvas.SetLeft(img, j * FrameWidth);
 
                     Object RowObj = (Object)i;
                     Object ColObj = (Object)j;
                     img.ManipulationStarted += (obj, args) => Image_ManipulationStarted(obj, args, RowObj, ColObj);
-                    //ContentPanel.Children.Add(img);
                     canvasPanel.Children.Add(img);
                     mImageList.Add(img);
                 }
@@ -130,14 +125,8 @@ namespace TileGame
                     writeableBitmap.Render(imgBase, translate);//在位图中呈现元素
                     writeableBitmap.Invalidate();
                     mBitmapSource.Add(writeableBitmap);
-                    //mImageList[i * Column + j].Source = writeableBitmap;
-                    //mImageList[mTile[i * Column + j]].Source = writeableBitmap;
                 }
             }
-
-            //BitmapImage bi = new BitmapImage(new Uri("Background.png", UriKind.Relative));
-            //mImageList[Row * Column - 1].Source = bi;
-
             refreshContent();
         }
 
@@ -149,7 +138,6 @@ namespace TileGame
 
         void Image_ManipulationStarted(object sender, ManipulationStartedEventArgs e, Object row, Object col)
         {
-        //    MessageBox.Show(String.Format("in {0} row,and {1} column", (Int32)row, (Int32)col));
             Int32 aX = (Int32)col + 1;
             Int32 aY = (Int32)row + 1;
 
@@ -160,7 +148,6 @@ namespace TileGame
                 mTile.HandleClick(aX,aY);
                 applyAnimation(sender,direction);
                 txtCount.Text = (++mStepCnt).ToString();
-                //refreshContent();
             }
         }
 
